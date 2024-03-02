@@ -13,7 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 
 # Create a database connection
-conn = sqlite3.connect('video/fingerprints.db')
+conn = sqlite3.connect('fingerprints.db')
 c = conn.cursor()
 if conn is None:
     print("Error! cannot create the database connection.")
@@ -94,6 +94,20 @@ def extract_features(frame):
     return features
 
 # Main routine
+def process_video(video_path):
+    segments = extract_segments(video_path)
+    aggregated_features = []
+    
+    for segment in segments:
+        features = process_segment(video_path, segment)
+        # Aggregate features (for example, by averaging)
+        if features:
+            aggregated_feature = np.mean(features, axis=0)  # Taking average, adjust as needed
+            aggregated_features.append(aggregated_feature)
+        
+    return aggregated_features
+
+# Loop through all the words in words.txt
 with open('words.txt') as f:
     for line in f:
         # Remove lines that are blank

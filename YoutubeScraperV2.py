@@ -13,7 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 
 # Create a database connection
-conn = sqlite3.connect('video/fingerprints.db')
+conn = sqlite3.connect('fingerprints.db')
 c = conn.cursor()
 if conn is None:
     print("Error! cannot create the database connection.")
