@@ -41,8 +41,7 @@ def video_Info(yt):
     return info
 
 # Extract 5-second clips from a video
-# Extract 5-second clips from a video
-def extract_segments(video_path, segment_length=1, frame_skip=10):
+def extract_segments(video_path, segment_length=5, frame_skip=10):
     reader = imageio.get_reader(video_path, format='ffmpeg')
     print(reader.get_meta_data())
     fps = reader.get_meta_data()['fps']
